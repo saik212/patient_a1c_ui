@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { FhirClientContext } from '../FhirClientContext';
 import A1cChart from './A1cChart'
 import CurrentA1cPanel from './CurrentA1cPanel'
+import PatientRecommendations from './PatientRecommendations';
 
 const LOINC_CODES = {
   a1c: '4548-4',
@@ -31,17 +32,40 @@ const getVitalsByCode = (vitals, code) => {
   return vitals.filter(vital => vital.code.coding[0].code === code)
 }
 
-export default function PatientA1c () {
+const getA1cStatus = (currentA1c) => {
+  if (!currentA1c) return null
+  if (currentA1c > 5.7) {
+    if (currentA1c > 6.5) return 'diabetic'
+    return 'prediabetic'
+  }
+  return 'normal'
+}
+
+export default function PatientA1c (props) {
+  const patient = props.patient
   const fhirContext = useContext(FhirClientContext)
   const fhirClient = fhirContext.client
   const [vitals, setVitals] = useState(null)
   let mappedVitals = vitals ? mapVitals(vitals) : {}
   const vitalsComponents = () => {
     if (vitals) {
-      console.log(mappedVitals.a1c[0])
+      const currentA1c = mappedVitals.a1c[0]
+      const a1cValue = currentA1c.valueQuantity.value
       return (
         <>
-        <CurrentA1cPanel currentA1c={mappedVitals.a1c[0]}/>
+        <CurrentA1cPanel currentA1c={
+          {
+            value: a1cValue,
+            a1cStatus: getA1cStatus(a1cValue),
+            effectiveDateTime: currentA1c.effectiveDateTime
+          }
+        }/>
+        <PatientRecommendations patient={({
+          currentA1c: a1cValue,
+          a1cStatus: getA1cStatus(a1cValue),
+          bmi: mappedVitals.bmi[0].valueQuantity.value,
+          ...patient
+        })}/>
         <A1cChart a1cVitals={mappedVitals.a1c ?? []}/>
         </>
       )

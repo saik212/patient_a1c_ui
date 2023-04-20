@@ -1,7 +1,6 @@
 import { Navigate } from 'react-router-dom';
 import DashboardLayout from 'src/components/dashboard/DashboardLayout';
 import MainLayout from 'src/components/MainLayout';
-// import Dashboard from 'src/pages/Dashboard';
 import Dashboard from 'src/components/dashboard/Dashboard';
 import Launcher from 'src/Launcher';
 

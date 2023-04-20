@@ -40,11 +40,9 @@ export default class DashboardNavbar extends React.Component {
         error: null
       };
     }
-    // this loader is used for
 
     componentDidMount() {
       const client = this.context.client;
-      console.log(client);
       this._loader = client.patient
         .read()
         .then(patient => {

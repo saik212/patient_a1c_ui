@@ -44,6 +44,9 @@ const useStyles = makeStyles(() =>
         height: "50%",
         "padding-bottom": "40px",
       },
+      ".a1c-table": {
+        "background-color": "#f4f6f8"
+      },
       ".recommendations": {},
       ".current-a1c-panel": {},
     },

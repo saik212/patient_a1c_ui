@@ -45,17 +45,27 @@ export default function PatientRecommendations(props) {
     return recs;
   };
 
+  const mapRecsToUL = (recs) => {
+    return (
+      <ul>
+        {recs.map((rec, idx) => {
+          return <li key={idx}>{rec}</li>;
+        })}
+      </ul>
+    );
+  };
+
   const PatientRecommendations = () => {
     const nutritionRecs = getNutritionalRecommendations();
     const fitnessRecs = getFitnessRecommendations();
     const rows = [
       {
-        nutritionRecs,
-        fitnessRecs,
+        nutritionRecs: mapRecsToUL(nutritionRecs),
+        fitnessRecs: mapRecsToUL(fitnessRecs),
       },
     ];
     return (
-      <TableContainer component={Paper}>
+      <TableContainer component={Paper} className="a1c-table">
         <Table aria-label="simple table">
           <TableHead>
             <TableRow>

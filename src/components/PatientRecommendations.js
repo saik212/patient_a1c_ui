@@ -1,4 +1,11 @@
 import Typography from "@mui/material/Typography";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
 
 const NUTRITIONAL_RECOMMENDATIONS = {
   normal: ["A1c levels normal. No nutritional recommendations."],
@@ -18,16 +25,14 @@ const FITNESS_RECOMMENDATIONS = {
 export default function PatientRecommendations(props) {
   const { currentA1c, a1cStatus, age, bmi } = props.patient;
 
-  const renderNutritionalRecommendations = () => {
+  const getNutritionalRecommendations = () => {
     const recs = NUTRITIONAL_RECOMMENDATIONS[a1cStatus];
     if (a1cStatus === "diabetic")
       recs.push(...NUTRITIONAL_RECOMMENDATIONS.prediabetic);
-    return recs.map((rec, idx) => {
-      return <li key={idx}>{rec}</li>;
-    });
+    return recs;
   };
 
-  const renderFitnessRecommendations = () => {
+  const getFitnessRecommendations = () => {
     const recs = [];
     if (a1cStatus !== "normal") {
       recs.push(...FITNESS_RECOMMENDATIONS.general);
@@ -37,24 +42,59 @@ export default function PatientRecommendations(props) {
       recs.push(...FITNESS_RECOMMENDATIONS.normal);
     }
 
-    return recs.map((rec, idx) => {
-      return <li key={idx}>{rec}</li>;
-    });
+    return recs;
+  };
+
+  const PatientRecommendations = () => {
+    const nutritionRecs = getNutritionalRecommendations();
+    const fitnessRecs = getFitnessRecommendations();
+    const rows = [
+      {
+        nutritionRecs,
+        fitnessRecs,
+      },
+    ];
+    return (
+      <TableContainer component={Paper}>
+        <Table aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell>Nutritional Recommendations</TableCell>
+              <TableCell>Fitness Recommendations</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows.map((row, idx) => (
+              <TableRow
+                key={idx}
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              >
+                <TableCell component="th" scope="row">
+                  {row.nutritionRecs}
+                </TableCell>
+                <TableCell component="th" scope="row">
+                  {row.fitnessRecs}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    );
   };
 
   return (
-    <div className="recommendations">
-      <Typography component="h2" variant="h6" color="primary" gutterBottom>
+    <div className="recommendations a1c-panel">
+      <Typography
+        component="h2"
+        variant="h6"
+        color="primary"
+        gutterBottom
+        className="panel-header"
+      >
         Patient Recommendations
       </Typography>
-      <ul>
-        Nutritional Recommendations
-        {renderNutritionalRecommendations()}
-      </ul>
-      <ul>
-        Fitness Recommendations
-        {renderFitnessRecommendations()}
-      </ul>
+      <PatientRecommendations />
     </div>
   );
 }

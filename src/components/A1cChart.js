@@ -26,8 +26,14 @@ export default function A1cChart(props) {
     .reverse();
 
   return (
-    <div className="a1c-chart">
-      <Typography component="h2" variant="h6" color="primary" gutterBottom>
+    <div className="a1c-chart a1c-panel">
+      <Typography
+        component="h2"
+        variant="h6"
+        color="primary"
+        gutterBottom
+        className="panel-header"
+      >
         A1c Results
       </Typography>
       <ResponsiveContainer>

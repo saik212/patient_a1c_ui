@@ -52,7 +52,7 @@ export default function PatientA1c(props) {
       const currentA1c = mappedVitals.a1c[0];
       const a1cValue = currentA1c.valueQuantity.value;
       return (
-        <Grid container spacing={3}>
+        <Grid container spacing={1}>
           <Grid item xs={4}>
             <CurrentA1cPanel
               currentA1c={{
@@ -61,6 +61,9 @@ export default function PatientA1c(props) {
                 effectiveDateTime: currentA1c.effectiveDateTime,
               }}
             />
+          </Grid>
+          <Grid item xs={4} height={"500px"}>
+            <A1cChart a1cVitals={mappedVitals.a1c ?? []} />
           </Grid>
           <Grid item xs={4}>
             <PatientRecommendations
@@ -71,9 +74,6 @@ export default function PatientA1c(props) {
                 ...patient,
               }}
             />
-          </Grid>
-          <Grid item xs={4} height={"500px"}>
-            <A1cChart a1cVitals={mappedVitals.a1c ?? []} />
           </Grid>
         </Grid>
       );

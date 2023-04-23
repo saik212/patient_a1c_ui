@@ -1,36 +1,40 @@
-import { createStyles, makeStyles } from '@material-ui/styles';
+import { createStyles, makeStyles } from "@material-ui/styles";
 
-const useStyles = makeStyles(() => createStyles({
-  '@global': {
-    '*': {
-      boxSizing: 'border-box',
-      margin: 0,
-      padding: 0,
+const useStyles = makeStyles(() =>
+  createStyles({
+    "@global": {
+      "*": {
+        boxSizing: "border-box",
+        margin: 0,
+        padding: 0,
+      },
+      html: {
+        "-webkit-font-smoothing": "antialiased",
+        "-moz-osx-font-smoothing": "grayscale",
+        height: "100%",
+        width: "100%",
+      },
+      body: {
+        backgroundColor: "#f4f6f8",
+        height: "100%",
+        width: "100%",
+      },
+      a: {
+        textDecoration: "none",
+      },
+      "#root": {
+        height: "100%",
+        width: "100%",
+      },
+      ".a1c-chart": {
+        width: "50%",
+        height: "50%",
+      },
+      ".recommendations": {},
+      ".current-a1c-panel": {},
     },
-    html: {
-      '-webkit-font-smoothing': 'antialiased',
-      '-moz-osx-font-smoothing': 'grayscale',
-      height: '100%',
-      width: '100%'
-    },
-    body: {
-      backgroundColor: '#f4f6f8',
-      height: '100%',
-      width: '100%'
-    },
-    a: {
-      textDecoration: 'none'
-    },
-    '#root': {
-      height: '100%',
-      width: '100%'
-    },
-    '.test-className': {
-      width: '50% !important',
-      height: '50% !important'
-    }
-  }
-}));
+  })
+);
 
 const GlobalStyles = () => {
   useStyles();

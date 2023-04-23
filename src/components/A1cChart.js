@@ -1,27 +1,36 @@
-import { useTheme } from '@mui/material/styles';
-import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer } from 'recharts';
-import Typography from '@mui/material/Typography';
+import { useTheme } from "@mui/material/styles";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  Label,
+  ResponsiveContainer,
+} from "recharts";
+import Typography from "@mui/material/Typography";
 
 function createChartData(date, value) {
-  const dateTime = new Date(date)
+  const dateTime = new Date(date);
   return {
     time: dateTime.toLocaleDateString(),
-    amount: value
+    amount: value,
   };
 }
-
-
 
 export default function A1cChart(props) {
   const theme = useTheme();
   const data = props.a1cVitals
-                    .map(vitals => createChartData(vitals.effectiveDateTime, vitals.valueQuantity.value))
-                    .reverse();
+    .map((vitals) =>
+      createChartData(vitals.effectiveDateTime, vitals.valueQuantity.value)
+    )
+    .reverse();
 
   return (
-    <>
-      <Typography component="h2" variant="h6" color="primary" gutterBottom>A1c Results</Typography>
-      <ResponsiveContainer className='test-className'>
+    <div className="a1c-chart">
+      <Typography component="h2" variant="h6" color="primary" gutterBottom>
+        A1c Results
+      </Typography>
+      <ResponsiveContainer>
         <LineChart
           data={data}
           margin={{
@@ -44,7 +53,7 @@ export default function A1cChart(props) {
               angle={270}
               position="left"
               style={{
-                textAnchor: 'middle',
+                textAnchor: "middle",
                 fill: theme.palette.text.primary,
                 ...theme.typography.body1,
               }}
@@ -61,6 +70,6 @@ export default function A1cChart(props) {
           />
         </LineChart>
       </ResponsiveContainer>
-    </>
+    </div>
   );
 }

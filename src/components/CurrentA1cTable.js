@@ -38,9 +38,9 @@ export default function CurrentA1cTable(props) {
       <Table aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>Date</TableCell>
-            <TableCell>Result</TableCell>
-            <TableCell>Status</TableCell>
+            <TableCell style={{ fontWeight: "bold" }}>Date</TableCell>
+            <TableCell style={{ fontWeight: "bold" }}>Result</TableCell>
+            <TableCell style={{ fontWeight: "bold" }}>Status</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

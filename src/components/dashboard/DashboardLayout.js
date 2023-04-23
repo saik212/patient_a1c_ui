@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import { experimentalStyled } from '@material-ui/core';
 import DashboardNavbar from './DashboardNavbar';
@@ -39,12 +38,11 @@ const DashboardLayoutContent = experimentalStyled('div')({
 });
 
 const DashboardLayout = () => {
-  const [isMobileNavOpen, setMobileNavOpen] = useState(false);
 
   return (
     <FhirClientProvider>
       <DashboardLayoutRoot>
-        <DashboardNavbar onMobileNavOpen={() => setMobileNavOpen(true)} />
+        <DashboardNavbar/>
         <DashboardLayoutWrapper>
           <DashboardLayoutContainer>
             <DashboardLayoutContent>

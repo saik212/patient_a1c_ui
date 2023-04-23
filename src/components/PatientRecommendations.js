@@ -47,9 +47,13 @@ export default function PatientRecommendations(props) {
 
   const mapRecsToUL = (recs) => {
     return (
-      <ul>
+      <ul style={{ listStyle: "none" }}>
         {recs.map((rec, idx) => {
-          return <li key={idx}>{rec}</li>;
+          return (
+            <li key={idx} style={{ margin: "10px 0", padding: "0 10px" }}>
+              {rec}
+            </li>
+          );
         })}
       </ul>
     );
@@ -69,8 +73,12 @@ export default function PatientRecommendations(props) {
         <Table aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>Nutritional Recommendations</TableCell>
-              <TableCell>Fitness Recommendations</TableCell>
+              <TableCell style={{ paddingLeft: "25px", fontWeight: "bold" }}>
+                Nutritional Recommendations
+              </TableCell>
+              <TableCell style={{ paddingLeft: "25px", fontWeight: "bold" }}>
+                Fitness Recommendations
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -79,10 +87,18 @@ export default function PatientRecommendations(props) {
                 key={idx}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
-                <TableCell component="th" scope="row">
+                <TableCell
+                  component="th"
+                  scope="row"
+                  style={{ verticalAlign: "top" }}
+                >
                   {row.nutritionRecs}
                 </TableCell>
-                <TableCell component="th" scope="row">
+                <TableCell
+                  component="th"
+                  scope="row"
+                  style={{ verticalAlign: "top" }}
+                >
                   {row.fitnessRecs}
                 </TableCell>
               </TableRow>

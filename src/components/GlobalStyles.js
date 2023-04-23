@@ -45,10 +45,12 @@ const useStyles = makeStyles(() =>
         "padding-bottom": "40px",
       },
       ".a1c-table": {
-        "background-color": "#f4f6f8"
+        "background-color": "#f4f6f8",
       },
       ".recommendations": {},
-      ".current-a1c-panel": {},
+      ".current-a1c-panel": {
+        "margin-left": "5px",
+      },
     },
   })
 );
